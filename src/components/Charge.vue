@@ -10,7 +10,7 @@
 
     <div class="charge-box">
       <input type="number" id="chargeAmount" placeholder="チャージするやま" min="1" step="1">
-      <button id="btnCharge">チャージする</button>
+      <button id="btnCharge" @click="changeViewModal">チャージする</button>
       <button id="btnBack" type="button" class="back-btn">戻る</button>
     </div>
 
@@ -22,12 +22,12 @@
     </div>
 
     <!-- モーダル -->
-    <div id="confirmModal" class="modal">
+    <div v-if="isModalOpen" id="confirmModal" class="modal">
       <div class="modal-content">
         <p>高山の承認を得ましたか？</p>
         <div class="modal-buttons">
           <button id="modalYes">はい</button>
-          <button id="modalNo">いいえ</button>
+          <button id="modalNo" @click="changeViewModal">いいえ</button>
         </div>
       </div>
     </div>
@@ -35,67 +35,25 @@
 </template>
 
 <script>
-import { useModeStore } from '@/stores/mode';
+import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth'
 
 export default {
-  name: 'LoginView',
+  name: 'ChargeView',
   setup() {
-    const modeStore = useModeStore();
     const authStore = useAuthStore();
-    return { modeStore, authStore };
+    return { authStore };
   },
   data() {
     return {
-      yamapaySecretMode: false,
-      username: "",
-      tapCount: 0
+      isModalOpen: ref(false)
     };
   },
 
   methods: {
-    async doLogin() {
-      const username = this.username.trim();
-      if (username === "") {
-        alert("ユーザー名を入力してください");
-        return;
-      }
-
-      const success = await this.authStore.login(username)
-
-      if (success) {
-        // ✅ ログイン成功 → メニュー画面へ遷移
-        this.$router.push({ name: 'menu', params: { user: this.authStore.user } })
-      } else {
-        // ❌ 何もしない
-      }
-    },
-
-    // 秘密のタップカウント
-    secretTap() {
-      this.tapCount++;
-
-      if (this.tapCount === 5) {
-        alert("あと2回でハードモードに入れます…！");
-      }
-
-      if (this.tapCount === 7) {
-        alert("ハードモード突入！");
-        this.yamapaySecretMode = true;
-      }
-    },
-    // ログイン処理
-    handleLogin() {
-      // ハードモードフラグが立っていたらハードモードに変更する
-      if (this.yamapaySecretMode) {
-        this.modeStore.changeToHardMode();
-      } else {
-        this.modeStore.changeToNormalMode();
-      }
-
-      // ログインしたら裏モードは封印
-      this.tapCount = 0;
-      this.doLogin();
+    async changeViewModal() {
+      // モーダルの表示非表示を変更
+      this.isModalOpen = !this.isModalOpen;
     }
   }
 }
