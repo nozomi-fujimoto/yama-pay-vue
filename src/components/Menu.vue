@@ -66,78 +66,7 @@ export default {
     },
   },
 };
-//   methods:{}
-//   // 吹き出し用メッセージのリスト
-//     let messages = [
-//      "今日はパーっといっちゃう？",
-//      "今日も一日おつかれさま",
-//      "やまPayはいつでも貴方のそばに",
-//      "一息入れちゃう？"
-//     ];
 
-//    if (this.isSecretMode) {
-
-//     // マスコット画像を変更
-//     const mascotImg = document.querySelector(".mascot");
-//     mascotImg.src = "yama_pay_hard.png";
-
-//     // 吹き出しメッセージを差し替え
-//     messages = [
-//       "ハードモードだよ",
-//       "厳しいこと言わるから気を付けて",
-//       "注意！ハードモードです",
-//       "こんなの見つけるなんて暇なの？"
-//     ];
-
-//     localStorage.setItem("yamapaySecretMode", "true"); // ローカルに保存
-//   },
-
-//     // APIから残高を取得
-//     async function fetchBalance(username) {
-//       try {
-//         const apiUrl = `https://yamapay.seafood-avocado.com/api/wallets/${username}/balance`;
-//         const response = await fetch(apiUrl);
-//         if (!response.ok) throw new Error("HTTPエラー: " + response.status);
-//         const data = await response.json();
-//         document.getElementById("balance").innerHTML =
-//           Number(data.balance).toLocaleString() + '<span class="unit">やま</span>';
-//       } catch (error) {
-//         console.error("残高取得に失敗:", error);
-//         document.getElementById("balance").innerHTML = "取得できなかったです";
-//       }
-//     }
-
-//     document.addEventListener("DOMContentLoaded", () => {
-//       const username = getUsernameFromURL();
-//       document.getElementById("username").textContent = username;
-//       fetchBalance(username);
-
-//       document.getElementById("btnCharge").addEventListener("click", () => {
-//         alert("チャージ画面へ移動します");
-//         // charge.html に遷移、ユーザー名を渡す
-//         window.location.href = `charge.html?user=${encodeURIComponent(username)}`;
-//       });
-
-//       document.getElementById("btnPay1").addEventListener("click", () => {
-//         alert("支払い画面へ移動します");
-//         // pay.html に遷移、ユーザー名を渡す
-//         window.location.href = `pay.html?user=${encodeURIComponent(username)}`;
-//       });
-
-//       document.getElementById("btnPay2").addEventListener("click", () => {
-//         alert("現在開発中です");
-//       });
-//     });
-
-//     // ランダムに1つ選ぶ関数
-//     function getRandomMessage() {
-//      return messages[Math.floor(Math.random() * messages.length)];
-//     }
-
-//   document.addEventListener("DOMContentLoaded", () => {
-//     const balloon = document.querySelector(".balloon3-right-btm p");
-//     balloon.innerHTML = getRandomMessage();
-//   });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

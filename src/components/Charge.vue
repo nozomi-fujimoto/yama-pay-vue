@@ -15,7 +15,7 @@
     </div>
 
     <div class="mascot-area">
-      <img class="mascot" src="yama_wallet.png" alt="やまのマスコット" />
+      <img class="mascot" src="/images/yama_wallet.png" alt="やまのマスコット" />
       <div class="balloon3-right-btm">
         <p>今日はパーっと<br>いっちゃう？</p>
       </div>
