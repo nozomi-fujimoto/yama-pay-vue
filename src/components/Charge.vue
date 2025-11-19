@@ -26,7 +26,7 @@
       <div class="modal-content">
         <p>高山の承認を得ましたか？</p>
         <div class="modal-buttons">
-          <button id="modalYes">はい</button>
+          <button id="modalYes" @click="charge">はい</button>
           <button id="modalNo" @click="changeViewModal">いいえ</button>
         </div>
       </div>
@@ -54,6 +54,11 @@ export default {
     async changeViewModal() {
       // モーダルの表示非表示を変更
       this.isModalOpen = !this.isModalOpen;
+    },
+    async charge() {
+      this.authStore.charge("fujimoto",100,"aaa")
+      // モーダルの表示非表示を変更
+      this.changeViewModal();
     }
   }
 }

@@ -4,7 +4,7 @@ import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     userId: null,
-    balance1: null,
+    balance: null,
     error: null,
     loading: false,
   }),
@@ -27,6 +27,21 @@ export const useAuthStore = defineStore('auth', {
         this.loading = false
       }
     },
+    async charge(username, amount, description) {
+      try {
+        const data = { amount: amount, description: description }
+        const res = await axios.post(`https://yamapay.seafood-avocado.com/api/wallets/${username}/charge`, data);
+
+        // 成功時
+        this.balance = res.data.balance
+        return true
+      } catch (err) {
+        this.error = err.response?.data?.detail || 'チャージに失敗しました'
+        return false
+      } finally {
+        this.loading = false
+      }
+    }
   },
 
   persist: true, // ログイン状態を維持したい場合
