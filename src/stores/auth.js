@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
         const res = await axios.post(`https://yamapay.seafood-avocado.com/api/wallets/${username}/charge`, data);
 
         // 成功時
-        this.balance = res.data.balance
+        this.balance = res.data.balanceAfter
         return true
       } catch (err) {
         this.error = err.response?.data?.detail || 'チャージに失敗しました'
