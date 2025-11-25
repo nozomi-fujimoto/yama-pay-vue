@@ -12,7 +12,7 @@
     </div>
 
     <div class="charge-box">
-      <input type="number" id="chargeAmount" placeholder="チャージするやま" min="1" step="1">
+      <input type="number"  v-model="chargeAmount" id="chargeAmount" placeholder="チャージするやま" min="1" step="1">
       <button id="btnCharge" @click="changeViewModal">チャージする</button>
       <button id="btnBack" type="button" class="back-btn" @click="return2Menu">
         戻る
@@ -61,7 +61,7 @@ export default {
       this.isModalOpen = !this.isModalOpen;
     },
     async charge() {
-      this.authStore.charge("fujimoto", 100, "aaa")
+      this.authStore.charge(this.authStore.userId, this.chargeAmount, "チャージ")
       // モーダルの表示非表示を変更
       this.changeViewModal();
     },
