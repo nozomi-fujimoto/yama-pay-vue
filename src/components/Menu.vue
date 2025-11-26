@@ -16,7 +16,7 @@
       <button class="action charge" id="btnCharge" @click="toCharge">
         <span>チャージ</span>
       </button>
-      <button class="action pay" id="btnPay1">
+      <button class="action pay" id="btnPay1" @click="toPay">
         <span>支払う</span>
       </button>
       <button class="action history" id="btnPay2"><span>取引履歴</span></button>
@@ -59,11 +59,14 @@ export default {
   methods: {
     // チャージ画面移動
     toCharge() {
-      // 一旦アラート出すだけ
       alert("チャージ画面へ移動します");
-      // ✅ ログイン成功 → メニュー画面へ遷移
       this.$router.push({ name: 'charge'})
     },
+    // 支払い画面移動
+    toPay() {
+      alert("支払い画面へ移動します");
+      this.$router.push({ name: 'pay'})
+    }
   },
 };
 
