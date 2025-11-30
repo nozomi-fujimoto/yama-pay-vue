@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import { useModeStore } from "@/stores/mode";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -7,6 +8,7 @@ export const useAuthStore = defineStore('auth', {
     balance: null,
     error: null,
     loading: false,
+    modeStore: useModeStore()
   }),
 
   actions: {
@@ -38,6 +40,28 @@ export const useAuthStore = defineStore('auth', {
       } catch (err) {
         this.error = err.response?.data?.detail || 'チャージに失敗しました'
         return false
+      } finally {
+        this.loading = false
+      }
+    },
+    async pay(username, amount, description) {
+      try {
+        const data = { amount: amount, description: description }
+        const res = await axios.post(`https://yamapay.seafood-avocado.com/api/wallets/${username}/use`, data);
+
+        // 成功時
+        this.balance = res.data.balanceAfter
+        this.modeStore.paySound();
+        return true
+      } catch (err) {
+       
+        if (err.response?.data?.detail === "Insufficient balance") {
+          this.error = '残高不足です。'
+          this.modeStore.payFailedSound();
+        } else {
+          this.error = err.response?.data?.detail || '支払いに失敗しました'
+        }
+        return false;
       } finally {
         this.loading = false
       }

@@ -1,8 +1,9 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '../views/LoginView.vue'
-import MenuView from '../views/MenuView.vue'
+import LoginView from '@/views/LoginView.vue'
+import MenuView from '@/views/MenuView.vue'
 import ChargeView from '@/views/ChargeView.vue'
+import PayView from '@/views/PayView.vue'
 
 const routes = [
   {
@@ -21,6 +22,12 @@ const routes = [
     path: '/charge',
     name: 'charge',
     component: ChargeView,
+    props: true
+  },
+  {
+    path: '/pay',
+    name: 'pay',
+    component: PayView,
     props: true
   }
 ]
