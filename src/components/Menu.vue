@@ -19,7 +19,7 @@
       <button class="action pay" id="btnPay1" @click="toPay">
         <span>支払う</span>
       </button>
-      <button class="action history" id="btnPay2"><span>取引履歴</span></button>
+      <button class="action history" id="btnPay2" @click="toTrade"><span>取引履歴</span></button>
     </div>
 
     <div class="mascot-area">
@@ -66,6 +66,10 @@ export default {
     toPay() {
       alert("支払い画面へ移動します");
       this.$router.push({ name: 'pay'})
+    },
+    // 取引画面移動
+    toTrade() {
+      alert("現在開発中です");
     }
   },
 };
